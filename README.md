@@ -53,6 +53,10 @@ The result of this SQL query reveals that Raymond Buch is the highest and most p
 
 ![](PROJECT1.png)
 
+### 2. Identify The Top and Bottom 5 Sub-Categories In Terms Of Profit Generation:
+
+
+
 
 
 
