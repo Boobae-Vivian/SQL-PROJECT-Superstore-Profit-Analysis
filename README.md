@@ -9,8 +9,8 @@ This project is an innovative data analytics project designed to unravel key ins
 1. Ascertain the top 5 most profitable customers in the west region
 2. Identify the top and bottom 5 sub-categories in terms of profit generation
 3. Determine the top 10 cities with the highest total sales
-4. Identify products with quantity above 15
-5. Identify cities with average sales equal to or greater than 500
+4. Identify high demanding products with quantities above 14
+5. Identify cities in the central region with average sales equal to or greater than 500
 6. Assign unique numbers to states based on profit in descending order
 7. Return customer names and cities with profits above the average
 8. Identify ship modes by total sales using Common Table Expressions (CTEs)
@@ -108,6 +108,85 @@ Breaking down the syntax:
 The result of this SQL query reveals that New York City is the top-ranked city with the highest total sales of $255,248.97. This information provides valuable insights into the cities contributing the most to overall sales, aiding in strategic business planning and resource allocation.
 
 ![](PROJECT3.png)
+
+### 4.  Identify High Demandibg Products With Quantities Above 14:
+
+To determine products with quantities exceeding 14, we will utilize various SQL functionalities, including the SELECT statement, COUNT aggregation, AS aliasing, GROUP BY clause for grouping data, HAVING clause for filtering grouped results, and ORDER BY clause for sorting. The SQL syntax is as follows:
+
+```sql
+SELECT Product, COUNT(Quantity) AS Quantity
+FROM Stores
+GROUP BY Product
+HAVING Quantity > 14
+ORDER BY Quantity DESC;
+```
+Breaking down the syntax:
+- SELECT Product, COUNT(Quantity) AS Quantity: This selects the product names and counts the occurrences of each product with quantities exceeding 14.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- GROUP BY Product: Groups the data by product, allowing the subsequent aggregation to be performed on individual products.
+- HAVING Quantity > 14: Filters the grouped results to include only those products with a quantity greater than 14.
+- ORDER BY Quantity DESC: Orders the results in descending order based on the count of quantities, showcasing products with the highest occurrences first.
+
+The result of this SQL query presents a list of products and their corresponding quantities, focusing specifically on products with quantities exceeding 14. This information is valuable for inventory management, highlighting products that may be in higher demand or requiring special attention due to their higher quantities.
+
+![](PROJECT4.png)
+
+### 5. Identify Cities In The Central Region With Average Sales Equal_to  Or Greater Than 500:
+
+To pinpoint cities in the central region with an average sales equal to or greater than $500, we will utilize several SQL functionalities, including the SELECT statement, AVG aggregation, AS aliasing, WHERE clause for filtering data, GROUP BY clause for grouping by city, HAVING clause for filtering grouped results, and ORDER BY clause for sorting. The SQL syntax is as follows:
+
+```SQL
+SELECT City, ROUND(AVG(Sales), 0) AS Average_Sales
+FROM Stores
+WHERE Region = "Central"
+GROUP BY City
+HAVING Average_Sales >= 500
+ORDER BY Average_Sales DESC;
+```
+Breaking down the syntax:
+- SELECT City, ROUND(AVG(Sales), 0) AS Average_Sales: This selects the city names and calculates the rounded average sales for each city.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- WHERE Region = "Central": Filters the data to include only records from the central region.
+- GROUP BY City: Groups the data by city, allowing the subsequent aggregation to be performed on individual cities.
+- HAVING Average_Sales >= 500: Filters the grouped results to include only those cities with an average sales value equal to or greater than $500.
+- ORDER BY Average_Sales DESC: Orders the results in descending order based on the calculated average sales.
+
+The result of this SQL query provides a list of cities in the central region with their respective average sales, focusing specifically on cities where the average sales meet or exceed the threshold of $500. This information is valuable for identifying high-performing cities in terms of sales within the specified region.
+
+![](PROJECT5.png)
+
+### 6. Assign Unique Numbers To States Based On Profit In Descending Order:
+
+To allocate distinct numbers to states based on their profit in descending order, we utilize various SQL functionalities, including the SELECT statement, ROW_NUMBER() window function, ORDER BY clause for sorting, and AS aliasing. The SQL syntax is as follows:
+
+```sql
+SELECT State, Profit, ROW_NUMBER() OVER (ORDER BY Profit DESC) AS Numbers
+FROM Stores;
+```
+Breaking down the syntax:
+- SELECT State, Profit, ROW_NUMBER() OVER (ORDER BY Profit DESC) AS Numbers: This selects the state names, profit values, and assigns a unique row number to each state based on their profits in descending order.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- ROW_NUMBER() OVER (ORDER BY Profit DESC) AS Numbers: Utilizes the ROW_NUMBER() window function to generate a unique sequential number for each row, ordered by profit in descending order.
+
+The result of this SQL query provides a list of states along with their respective profits and the assigned unique numbers. The numbers are assigned in descending order of profit, offering a ranking that reflects the profitability of each state. This information is valuable for prioritizing and categorizing states based on their financial performance.
+
+![](PROJECT6.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
