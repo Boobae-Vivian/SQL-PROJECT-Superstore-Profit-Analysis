@@ -55,9 +55,39 @@ The result of this SQL query reveals that Raymond Buch is the highest and most p
 
 ### 2. Identify The Top and Bottom 5 Sub-Categories In Terms Of Profit Generation:
 
+To identify the top and bottom 5 sub-categories in terms of profit generation, we utilize SQL functionalities, including the SELECT statement, SUM aggregation, AS aliasing, GROUP BY clause for grouping data, ORDER BY clause for sorting, and the LIMIT function to restrict the output to the desired number of results. The SQL syntax is as follows:
+
+Top 5 Sub-Categories:
+```sql
+SELECT `Sub category`, ROUND(SUM(Profit), 2) AS Profit
+FROM Stores
+GROUP BY `Sub Category`
+ORDER BY Profit DESC
+LIMIT 5;
+
+Bottom 5 Sub-Categories:
+sql
+SELECT `Sub category`, ROUND(SUM(Profit), 2) AS Profit
+FROM Stores
+GROUP BY `Sub Category`
+ORDER BY Profit ASC
+LIMIT 5;
+```
+Breaking down the syntax:
+- SELECT Sub category, ROUND(SUM(Profit), 2) AS Profit: This selects the sub-category names and calculates the total profit for each sub-category, rounding the result to two decimal places.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- GROUP BY Sub Category``: Groups the data by sub-category, allowing the subsequent aggregation to be performed on individual sub-categories.
+- ORDER BY Profit DESC or ORDER BY Profit ASC: Orders the results in descending (for the top 5) or ascending (for the bottom 5) order based on the calculated profit.
+- LIMIT 5: Restricts the output to the top or bottom 5 results.
+
+The result of this SQL query reveals that the "Copiers" sub-category is the highest profitable, with a total profit of $55,617.82, while the "Tables" sub-category is the least profitable, with a total profit of -$17,725.48.
+
+TOP 5 SUB-CATEGORY        | BOTTOM 5 SUB-CATEGORY
+:------------------------:|:----------------------:
+![](PROJECT2.png)         | ![](PROJECT2A.png) 
 
 
-
+### 3.  Determine The Top 10 Cities with the highest total sales
 
 
 
