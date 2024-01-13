@@ -89,6 +89,31 @@ TOP 5 SUB-CATEGORY        | BOTTOM 5 SUB-CATEGORY
 
 ### 3.  Determine The Top 10 Cities with the highest total sales
 
+To identify the top 10 cities with the highest total sales, we employ various SQL functionalities, including the SELECT statement, SUM aggregation, AS aliasing, GROUP BY clause for grouping data, ORDER BY clause for sorting, and the LIMIT function to restrict the output to the desired number of results. The SQL syntax is as follows:
+
+```sql
+SELECT City, ROUND(SUM(Sales), 2) AS Sales
+FROM Stores
+GROUP BY City
+ORDER BY Sales DESC
+LIMIT 10;
+```
+Breaking down the syntax:
+- SELECT City, ROUND(SUM(Sales), 2) AS Sales: This selects the city names and calculates the total sales for each city, rounding the result to two decimal places.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- GROUP BY City: Groups the data by city, allowing the subsequent aggregation to be performed on individual cities.
+- ORDER BY Sales DESC: Orders the results in descending order based on the calculated total sales.
+- LIMIT 10: Restricts the output to the top 10 results.
+
+The result of this SQL query reveals that New York City is the top-ranked city with the highest total sales of $255,248.97. This information provides valuable insights into the cities contributing the most to overall sales, aiding in strategic business planning and resource allocation.
+
+![](PROJECT3.png)
+
+
+
+
+
+
 
 
 
