@@ -57,8 +57,8 @@ The result of this SQL query reveals that Raymond Buch is the highest and most p
 
 To identify the top and bottom 5 sub-categories in terms of profit generation, we utilize SQL functionalities, including the SELECT statement, SUM aggregation, AS aliasing, GROUP BY clause for grouping data, ORDER BY clause for sorting, and the LIMIT function to restrict the output to the desired number of results. The SQL syntax is as follows:
 
-Top 5 Sub-Categories:
 ```sql
+Top 5 Sub-Categories:
 SELECT `Sub category`, ROUND(SUM(Profit), 2) AS Profit
 FROM Stores
 GROUP BY `Sub Category`
@@ -66,7 +66,6 @@ ORDER BY Profit DESC
 LIMIT 5;
 
 Bottom 5 Sub-Categories:
-sql
 SELECT `Sub category`, ROUND(SUM(Profit), 2) AS Profit
 FROM Stores
 GROUP BY `Sub Category`
@@ -171,6 +170,104 @@ Breaking down the syntax:
 The result of this SQL query provides a list of states along with their respective profits and the assigned unique numbers. The numbers are assigned in descending order of profit, offering a ranking that reflects the profitability of each state. This information is valuable for prioritizing and categorizing states based on their financial performance.
 
 ![](PROJECT6.png)
+
+### 7. Return Customer Names And Cities With Profits Above The Average:
+
+To retrieve customer names and cities where profits exceed the average, we employ various SQL functionalities, including the SELECT statement, WHERE clause for filtering data, a SUB-QUERY encapsulating the AVG aggregation, and the ORDER BY clause for sorting. The SQL syntax is as follows:
+
+```sql
+SELECT `Customer Name`, City, Profit
+FROM Stores
+WHERE Profit > (SELECT AVG(Profit) FROM Stores)
+ORDER BY Profit DESC;
+```
+Breaking down the syntax:
+- SELECT Customer Name, City, Profit: This selects the customer names, cities, and profit values.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- WHERE Profit > (SELECT AVG(Profit) FROM Stores): Filters the data to include only records where the profit is greater than the overall average profit calculated using a subquery.
+- ORDER BY Profit DESC: Orders the results in descending order based on the profit value.
+
+The subquery (SELECT AVG(Profit) FROM Stores) calculates the average profit across all records in the "Stores" table. The main query then retrieves customer names, cities, and profits for records where the profit is higher than this calculated average.
+
+The result of this SQL query provides a list of customer names, cities, and profits, focusing on those customers and cities where profits exceed the overall average. This information is useful for identifying high-performing customers and locations in terms of profitability.
+
+![](PROJECT7.png)
+
+### 8. Identify Ship Modes By Total Sales Using Common Table Expressions (CTEs):
+
+To analyze ship modes based on total sales using Common Table Expressions (CTEs), we will employ the WITH clause, SELECT statement, GROUP BY clause, and ORDER BY clause. The SQL syntax is as follows:
+
+```sql
+WITH SALES AS (SELECT `Row ID`, `Customer Name`, `Product Name`, `Ship Mode`, Sales FROM stores)
+SELECT `Ship Mode`, ROUND(SUM(Sales), 0) AS Sales FROM SALES
+GROUP BY `Ship Mode`
+ORDER BY Sales DESC;
+```
+Breaking down the syntax:
+- WITH SALES AS (SELECT Row ID, Customer Name, Product Name, Ship Mode, Sales FROM stores): This creates a Common Table Expression (CTE) named "SALES," which is essentially a temporary table containing selected columns from the "stores" table.
+- SELECT Ship Mode, ROUND(SUM(Sales), 0) AS Sales FROM SALES: This then selects the ship mode and the rounded sum of sales from the "SALES" CTE.
+- GROUP BY Ship Mode: Groups the data by ship mode, allowing the subsequent aggregation to be performed on individual ship modes.
+- ORDER BY Sales DESC: Orders the results in descending order based on the calculated total sales.
+
+The result of this SQL query provides a breakdown of ship modes along with their respective total sales. In this specific task, the output reveals that the "Standard Class" ship mode has the highest total sales, while the "Same Day" ship mode has the lowest total sales. This information is valuable for evaluating the performance of different shipping modes in terms of sales.
+
+![](PROJECT8.png)
+
+### 9. Ascertain The Total Discounts By Category:
+
+To determine the total discounts for each category, we will utilize SQL functionalities, including the SELECT statement, SUM aggregation, GROUP BY clause for grouping data by category, and the ORDER BY clause for sorting. The SQL syntax is as follows:
+
+```sql
+SELECT Category, ROUND(SUM(Discount), 0) AS Discount
+FROM Stores
+GROUP BY Category
+ORDER BY Discount ASC;
+```
+Breaking down the syntax:
+- SELECT Category, ROUND(SUM(Discount), 0) AS Discount: This selects the category names and calculates the rounded sum of discounts for each category.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- GROUP BY Category: Groups the data by category, allowing the subsequent aggregation to be performed on individual categories.
+- ORDER BY Discount ASC: Orders the results in ascending order based on the calculated total discounts.
+
+The result of this SQL query provides a summary of total discounts for each product category. The output indicates that the "Technology" category has a total discount of $243, the "Furniture" category has a total discount of $361, and the "Office Supplies" category has a total discount of $899. This information is useful for assessing the overall discount impact across different product categories.
+
+![](PROJECT9.png)
+
+### 10. Determine The Top 5 Customers With The Highest Number of Discounts:
+
+To identify the top 5 customers with the highest number of discounts, we leverage SQL functionalities, including the SELECT statement, COUNT aggregation, GROUP BY clause for grouping data by customer, ORDER BY clause for sorting, and the LIMIT function to restrict the output to the desired number of results. The SQL syntax is as follows:
+
+```sql
+SELECT `Customer Name`, COUNT(Discount) AS Discount
+FROM Stores
+GROUP BY `Customer Name`
+ORDER BY Discount DESC
+LIMIT 5;
+```
+Breaking down the syntax:
+- SELECT Customer Name, COUNT(Discount) AS Discount: This selects the customer names and counts the number of discounts for each customer.
+- FROM Stores: Specifies the source table as "Stores" from which the data is retrieved.
+- GROUP BY Customer Name: Groups the data by customer name, allowing the subsequent aggregation to be performed on individual customers.
+- ORDER BY Discount DESC: Orders the results in descending order based on the count of discounts.
+- LIMIT 5: Restricts the output to the top 5 results.
+
+The result of this SQL query provides a list of the top 5 customers with the highest number of discounts, showcasing their names and the respective count of discounts each has received. This information is valuable for identifying customers who frequently benefit from discounts and may help in tailoring future promotional strategies.
+
+![](PROJECT10.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
